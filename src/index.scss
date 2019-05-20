@@ -14,7 +14,8 @@ code {
 }
 // theme variables
 :root {
-  --color: red;
+  --backend: #184aaf;
+  --frontend: #d0e233;
 }
 // other variables
 $primaryColor: var(--color);

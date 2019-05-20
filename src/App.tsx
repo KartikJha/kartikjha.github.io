@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import TestComponent from "./components/TestComponent/TestComponent";
+import Project from "./components/Project/Project";
 
 const App: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const App: React.FC = () => {
         </a>
       </header>
       <TestComponent />
+      <Project message="Hello World" />
     </div>
   );
 }
