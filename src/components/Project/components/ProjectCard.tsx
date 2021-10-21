@@ -1,15 +1,18 @@
 import React from 'react';
 
 interface ProjectProps {
-  message: String
+  project: any,
+  getProjectLangs: Function
 }
 
 const Project: React.FC<ProjectProps> = ({
-  message
+  project,
+  getProjectLangs
 }) => {
   return (
     <div>
-      {message}
+      <h3>{project.name}</h3>
+      <p>{project.description}</p>
     </div>
   )
 };
