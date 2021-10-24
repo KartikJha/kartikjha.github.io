@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "./test-component.scss";
-import themeForName from "../../theme";
+import themeForName from "../../lib/theme";
 
 const TestComponent: React.FC = () => {
   const [ a, setA ] = useState(0);
