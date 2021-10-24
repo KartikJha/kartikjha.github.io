@@ -13,9 +13,16 @@ async function fetchStaticData(username: String) {
     return wrapServiceResult(staticData, []);
 }
 
+async function fetchLangs(langsUrl) {
+    const response = await fetch(langsUrl);
+    const langs = await response.json();
+    return wrapServiceResult(langs, []);
+}
+
 const networkService =  {
     fetchAllRepos,
-    fetchStaticData
+    fetchStaticData,
+    fetchLangs
 }
 
 export default networkService;

@@ -1,12 +1,13 @@
+import { Stack } from '@mui/material';
 import React, {useEffect, useState} from 'react';
 import ProjectCard from './components/ProjectCard';
 import projectService from './projectService';
 
-// interface ProjectProps {
-//   message: String
-// }
+interface ProjectProps {
+  fetchProjects: Boolean
+}
 
-const Project: React.FC = () => {
+const Project: React.FC<ProjectProps> = ({fetchProjects}) => {
   // const [fetchProjects, setFetchProjects] = useState(true);
   const [projects, setProjects] = useState([]);
 
@@ -19,19 +20,18 @@ const Project: React.FC = () => {
       console.error(errors.join(','));
     }
     setProjects(projects);
-    // setFetchProjects(false)
   }
 
   useEffect(() => {
     fetchProjectsAndSet();
-  })
+  }, [fetchProjects])
     
   return (
-    <div>
+    <Stack spacing={3}>
       {
-        projects.map(project => <ProjectCard project={project} getProjectLangs={() => true}/>)
+        projects.map(project => <ProjectCard project={project} getProjectLangs={projectService.getProjectLangs}/>)
       }
-    </div>
+    </Stack>
     // <ProjectCard projects={projects}/>
   )
 };

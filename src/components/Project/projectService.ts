@@ -20,8 +20,22 @@ async function getFilteredProjects() {
     return wrapServiceResult(allRepos.filter(v => staticData.allowedProjects[v.name]), []);
 }
 
+/**
+ * returns all the languages for a langsUrl
+ */
+async function getProjectLangs(langsUrl) {
+    const {value: langs, errors } = await withFailSafe(null, 'Could not fetch staticData')(networkService.fetchLangs)(langsUrl);
+    if (errors.length) {
+        return wrapServiceResult([], errors);
+    }
+    return wrapServiceResult(langs, []);
+}
+
+
+
 const projectService = {
-    getFilteredProjects
+    getFilteredProjects,
+    getProjectLangs
 }
 
 export default projectService;

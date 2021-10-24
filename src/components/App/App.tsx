@@ -4,7 +4,7 @@ import Project from '../Project/index';
 
 function App() {
   return <div>
-    <Project />
+    <Project fetchProjects={true}/>
   </div>
 
 }
