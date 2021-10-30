@@ -1,4 +1,5 @@
-import { Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import React, {useEffect, useState} from 'react';
 import ProjectCard from './components/ProjectCard';
 import projectService from './projectService';
@@ -27,15 +28,17 @@ const Project: React.FC<ProjectProps> = ({fetchProjects}) => {
   }, [fetchProjects])
     
   return (
-    <Stack spacing={3}>
-      {
-        projects.map(project => <ProjectCard project={project} getProjectLangs={projectService.getProjectLangs}/>)
-      }
-    </Stack>
+    <Box>
+      <Typography align='center' variant='h4' gutterBottom ><u>Projects</u></Typography>
+      <Stack spacing={3}>
+        {
+          projects.map(project => <ProjectCard project={project} getProjectLangs={projectService.getProjectLangs}/>)
+        }
+      </Stack>
+    </Box>
+    
     // <ProjectCard projects={projects}/>
   )
 };
-
-
 
 export default Project;
