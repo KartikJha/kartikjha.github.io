@@ -28,7 +28,7 @@ const Project: React.FC<ProjectProps> = ({fetchProjects}) => {
   }, [fetchProjects])
     
   return (
-    <Box>
+    <Box id="projects">
       <Typography align='center' variant='h4' gutterBottom ><u>Projects</u></Typography>
       <Stack spacing={3}>
         {

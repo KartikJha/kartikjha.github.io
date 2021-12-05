@@ -6,7 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Container from '@mui/material/Container';
 import Project from '../Project/index';
-
+import { Box } from '@mui/system';
 // const childPages = [
 //   {
 //     elevation: 0,
@@ -52,20 +52,22 @@ export default function App() {
       <ElevationScroll >
         <AppBar>
           <Toolbar>
-            <Typography variant="h6" component="div">
-              Scroll to Elevate App Bar
-            </Typography>
+            <a href="#projects">
+              <Typography variant="h6" component="div">
+                Project
+              </Typography>
+            </a>
           </Toolbar>
         </AppBar>
       </ElevationScroll>
       <Toolbar />
       <Container>
+        <Project fetchProjects={true}/>
         {/* <Landing />
             {
               childPages.map(cP => <Paper elevation={cP.elevation} children={cP.children} />)
             }
-        */}
-        <Project fetchProjects={true}/>
+        */}  
       </Container>
     </React.Fragment>
   );
