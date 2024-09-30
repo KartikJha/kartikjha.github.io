@@ -1,38 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Kartik Jha - Fullstack Developer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav {
+            margin: 1rem 0;
+            text-align: center;
+        }
+        nav a {
+            color: #333;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        section {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 0.5rem;
+        }
+        .about, .portfolio, .contact {
+            margin-bottom: 2rem;
+        }
+        .portfolio-item {
+            margin-bottom: 1rem;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #333;
+            color: #fff;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+        .contact-info a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+<header>
+    <h1>Kartik Jha - Fullstack Developer</h1>
+    <nav>
+        <a href="#about">About Me</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+<section id="about" class="about">
+    <h2>About Me</h2>
+    <p>
+        Hi, I'm Kartik Jha, a professional Fullstack Developer with expertise in both front-end and back-end technologies. I specialize in building scalable, efficient, and user-friendly web applications. 
+        With experience in JavaScript frameworks, Node.js, databases, and cloud services, I focus on delivering high-quality software solutions.
+    </p>
+</section>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+<section id="portfolio" class="portfolio">
+    <h2>Portfolio</h2>
+    <div class="portfolio-item">
+        <h3>Project 1: E-Commerce Web Application</h3>
+        <p>Developed a full-featured e-commerce platform using React, Node.js, and MongoDB, handling user authentication, payment gateways, and product management.</p>
+    </div>
+    <div class="portfolio-item">
+        <h3>Project 2: Task Management App</h3>
+        <p>A task management app built with Vue.js and Express.js. It supports real-time updates and notifications through WebSockets.</p>
+    </div>
+    <div class="portfolio-item">
+        <h3>Project 3: Portfolio Website</h3>
+        <p>This is a personal portfolio showcasing my full-stack development projects, designed with HTML, CSS, and JavaScript.</p>
+    </div>
+</section>
+
+<section id="contact" class="contact">
+    <h2>Contact</h2>
+    <p>If you'd like to get in touch, feel free to contact me through the following channels:</p>
+    <div class="contact-info">
+        <p>Email: <a href="mailto:kartik.jha@example.com">kartik.jha@example.com</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/kartikjha" target="_blank">linkedin.com/in/kartikjha</a></p>
+        <p>GitHub: <a href="https://github.com/kartikjha" target="_blank">github.com/kartikjha</a></p>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 Kartik Jha</p>
+</footer>
+
+</body>
 </html>
