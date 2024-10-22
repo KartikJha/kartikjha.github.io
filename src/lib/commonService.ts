@@ -7,7 +7,7 @@ const withFailSafe = (value, message) => (target) => async (...args) => {
   try {
 	const val = await target(...args);
     return val;
-  } catch (e) {
+  } catch (e: any) {
     console.error(e.stack); 
     // if (sendResponse) {
     //     return sendResponse(args[1], 500, message, {}, [e.stack], value);
