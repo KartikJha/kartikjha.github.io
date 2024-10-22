@@ -1,5 +1,5 @@
 import { configure } from '@storybook/react';
-import helpers from "../src/helpers";
+
 
 function loadStories() {
   const req = require.context('../src/components', true, /\.stories\.js$/);
