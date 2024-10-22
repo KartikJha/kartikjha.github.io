@@ -47,27 +47,35 @@ function ElevationScroll(props: Props) {
 
 export default function App() {
   return (
+    
     <React.Fragment>
       <CssBaseline />
-      <ElevationScroll >
-        <AppBar>
+      <ElevationScroll>
+        <AppBar position="sticky">
           <Toolbar>
-            <a href="#projects">
-              <Typography variant="h6" component="div">
-                Project
-              </Typography>
-            </a>
+            {/* Box with flex properties for horizontal alignment */}
+            <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between' }}>
+              <a href="#projects" style={{ textDecoration: 'none', color: 'inherit' }}>
+                <Typography variant="h6" component="div">
+                  Projects
+                </Typography>
+              </a>
+              <a href="#about" style={{ textDecoration: 'none', color: 'inherit' }}>
+                <Typography variant="h6" component="div">
+                  About
+                </Typography>
+              </a>
+              <a href="#contact" style={{ textDecoration: 'none', color: 'inherit' }}>
+                <Typography variant="h6" component="div">
+                  Contact
+                </Typography>
+              </a>
+            </Box>
           </Toolbar>
         </AppBar>
       </ElevationScroll>
-      <Toolbar />
       <Container>
-        <Project fetchProjects={true}/>
-        {/* <Landing />
-            {
-              childPages.map(cP => <Paper elevation={cP.elevation} children={cP.children} />)
-            }
-        */}  
+        <Project fetchProjects={true} />
       </Container>
     </React.Fragment>
   );
