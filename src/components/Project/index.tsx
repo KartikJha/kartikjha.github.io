@@ -29,7 +29,7 @@ const Project: React.FC<ProjectProps> = ({fetchProjects}) => {
     
   return (
     <Box id="projects">
-      <Typography align='center' variant='h4' gutterBottom ><u>Projects</u></Typography>
+      <Typography align='left' variant='h5' gutterBottom >Projects</Typography>
       <Stack spacing={3}>
         {
           projects.map(project => <ProjectCard project={project} getProjectLangs={projectService.getProjectLangs}/>)
