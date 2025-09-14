@@ -171,7 +171,7 @@ const Portfolio = () => {
       <section id="hero" className="min-h-screen flex items-center justify-center px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-7xl font-light mb-6 tracking-tight">
-            Full-Stack Developer
+            Full-Stack Engineer
             <span className="block text-blue-600 mt-2">& Problem Solver</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
@@ -182,7 +182,7 @@ const Portfolio = () => {
           {/* Developer Info Links */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             <a
-              href="https://linkedin.com/in/your-profile" // Update with your actual LinkedIn
+              href="https://www.linkedin.com/in/kartik-j-31074b170/" // Update with your actual LinkedIn
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-full hover:bg-gray-50 transition-colors text-sm font-medium"
@@ -191,7 +191,7 @@ const Portfolio = () => {
               LinkedIn
             </a>
             <a
-              href="https://toptal.com/resume/your-profile" // Update with your actual Toptal profile
+              href="https://www.toptal.com/resume/kartik-jha" // Update with your actual Toptal profile
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-full hover:bg-gray-50 transition-colors text-sm font-medium"
@@ -263,7 +263,7 @@ const Portfolio = () => {
                 <div className="grid grid-cols-2 gap-3">
                   {[
                     'JavaScript', 'TypeScript', 'React', 'Node.js', 
-                    'Next.js', 'MongoDB', 'PostgreSQL', 'AWS'
+                    'Express.js', 'Python', 'FASTApi', 'MongoDB', 'PostgreSQL', 'Linux Administration', 'K8S', 'AWS'
                   ].map((skill, index) => (
                     <div 
                       key={index}
