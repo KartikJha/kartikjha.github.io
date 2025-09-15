@@ -105,41 +105,32 @@ const downloadResume = () => {
       featured: true
     },
     {
-      title: "Task Management API",
-      description: "RESTful API with JWT authentication, role-based access control, and real-time notifications using WebSocket.",
-      tech: ["Node.js", "Express", "PostgreSQL", "JWT", "Socket.io", "Docker"],
+      title: "Colot Sticks",
+      description: "2D game engine focusing on performance optimization and color-based mechanics (Work in Progress)",
+      tech: ["Typescript", "Javascript", "HTML", "DOM Canvas API"],
+      codeLink: "https://github.com/KartikJha/color-sticks",
+      liveLink: "https://kartikjha.github.io/color-sticks/",
+      npmLink: null,
+      featured: false
+    },
+    {
+      title: "Battleship Backend",
+      description: "A lightweight Python backend for a Battleship-style game, built with FastAPI, featuring clean modular design and API endpoints for player actions and game management.",
+      tech: ["Python", "C", "Websockets"],
       liveLink: null,
-      codeLink: "https://github.com/KartikJha/task-api",
+      codeLink: "https://github.com/KartikJha/battleship_backend",
       npmLink: null,
       featured: false
     },
     {
-      title: "Data Visualization Dashboard",
-      description: "Interactive dashboard for data visualization with custom charts, real-time updates, and export functionality.",
-      tech: ["Next.js", "D3.js", "Chart.js", "Redis", "WebSocket"],
-      liveLink: "https://dashboard-demo.com",
-      codeLink: "https://github.com/KartikJha/data-dashboard",
-      npmLink: null,
-      featured: false
-    },
-    {
-      title: "Mobile-First PWA",
-      description: "Progressive Web App with offline functionality, push notifications, and native-like experience.",
-      tech: ["React", "PWA", "Service Workers", "IndexedDB", "Web Push API"],
-      liveLink: "https://pwa-demo.com",
-      codeLink: "https://github.com/KartikJha/mobile-pwa",
-      npmLink: null,
-      featured: false
-    },
-    {
-      title: "Microservices Architecture",
-      description: "Scalable microservices setup with API gateway, service discovery, and comprehensive monitoring.",
-      tech: ["Node.js", "Docker", "Kubernetes", "NGINX", "Prometheus"],
+      title: "Battleship Frontend",
+      description: "A modern React frontend for the Battleship game that connects to the backend API, featuring intuitive ship placement, turn-based gameplay controls, and dynamic board updates for an engaging player experience",
+      tech: ["Javascript", "Websockets", "HTML", "CSS"],
       liveLink: null,
-      codeLink: "https://github.com/KartikJha/microservices-template",
+      codeLink: "https://github.com/KartikJha/battleship_frontend",
       npmLink: null,
       featured: false
-    }
+    },
   ];
 
   const featuredProjects = projects.filter(p => p.featured);
@@ -393,8 +384,8 @@ const downloadResume = () => {
               {otherProjects.map((project, index) => (
                 <div key={index} className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
                   <h4 className="text-lg font-semibold mb-3 text-gray-900">{project.title}</h4>
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">{project.description}</p>
-                  
+                  <p style={{minHeight: "130px"}}className="text-gray-600 mb-4 text-sm leading-relaxed">{project.description}</p>
+<div>                  
                   {/* Tech Stack - Show only first 3 */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tech.slice(0, 3).map((tech, techIndex) => (
@@ -435,6 +426,7 @@ const downloadResume = () => {
                       Code
                     </a>
                   </div>
+                </div>
                 </div>
               ))}
             </div>
