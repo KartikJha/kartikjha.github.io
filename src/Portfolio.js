@@ -87,21 +87,21 @@ const downloadResume = () => {
   // Projects - Update these with your actual projects
   const projects = [
     {
-      title: "E-Commerce Platform",
-      description: "A full-stack e-commerce solution with real-time inventory management, payment processing, and advanced analytics dashboard.",
-      tech: ["React", "Node.js", "TypeScript", "MongoDB", "Stripe API", "AWS S3"],
-      liveLink: "https://your-ecommerce-demo.com",
-      codeLink: "https://github.com/KartikJha/ecommerce-platform",
-      npmLink: null,
+      title: "Load Test Util",
+      description: "A powerful load-testing tool designed to simulate heavy load scenarios via json config through CLI. Logging and summarizing API and DB metrics. Currently supports MongoDB (more databases to be added soon). Contributions are welcome",
+      tech: ["Javascript", "NPM"],
+      liveLink: "https://www.npmjs.com/package/load_test_util",
+      codeLink: "https://github.com/KartikJha/load_test_util",
+      npmLink: "https://www.npmjs.com/package/load_test_util",
       featured: true
     },
     {
-      title: "React UI Component Library",
-      description: "A comprehensive, accessible UI component library with TypeScript support, Storybook documentation, and NPM distribution.",
-      tech: ["React", "TypeScript", "Storybook", "Rollup", "Styled Components"],
-      liveLink: "https://storybook-ui-demo.com",
-      codeLink: "https://github.com/KartikJha/react-ui-components",
-      npmLink: "https://www.npmjs.com/package/@kartikjha/ui-components",
+      title: "Chrome AI Summarizer",
+      description: "This Chrome extension leverages built-in Chrome AI capabilities to streamline the process of extracting and summarizing content from web pages. Designed for professionals, researchers, and avid readers, the extension simplifies content consumption by providing concise summaries, saving users time and effort",
+      tech: ["Javascript", "HTML", "Chrome Extension Runtime"],
+      liveLink: "https://chromewebstore.google.com/detail/kmpanchfjndhbcmpfiekpfhmkconjabe?utm_source=item-share-cb",
+      codeLink: "https://github.com/KartikJha/chrome-ai-extension-prototype",
+      npmLink: null,
       featured: true
     },
     {
@@ -332,8 +332,8 @@ const downloadResume = () => {
                     </div>
                   </div>
                   
-                  <p className="text-gray-600 mb-6 leading-relaxed">{project.description}</p>
-                  
+                  <p className="text-gray-600 mb-6 leading-relaxed" style={{minHeight: "130px"}}>{project.description}</p>
+                 <div> 
                   {/* Tech Stack */}
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.tech.map((tech, techIndex) => (
@@ -380,6 +380,7 @@ const downloadResume = () => {
                       </a>
                     )}
                   </div>
+              </div>
                 </div>
               </div>
             ))}
