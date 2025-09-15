@@ -38,6 +38,7 @@ const Portfolio = () => {
     }
   };
 
+/*
   const downloadResume = async () => {
     try {
       // Try to read the uploaded resume file
@@ -68,6 +69,20 @@ const Portfolio = () => {
       // You could show a message to the user here
     }
   };
+*/
+const downloadResume = () => {
+  try {
+    const link = document.createElement('a');
+    link.href = '/Kartik_Jha_Resume.pdf';  // GitHub Pages will serve this
+    link.download = 'Kartik_Jha_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } catch (error) {
+    setResumeError(true);
+    console.error('Resume download failed:', error);
+  }
+};
 
   // Projects - Update these with your actual projects
   const projects = [
@@ -240,13 +255,14 @@ const Portfolio = () => {
                 open-source projects, or sharing knowledge with the developer community.
               </p>
               
-              <button
+              <a
                 onClick={downloadResume}
+                style={{cursor: "pointer"}}
                 className="inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors font-medium"
               >
                 <Download className="w-4 h-4" />
                 Download Resume
-              </button>
+              </a>
               
               {resumeError && (
                 <p className="text-sm text-red-600 mt-2">
