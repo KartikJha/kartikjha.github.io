@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, Calendar, ExternalLink, Download, Code, Briefcase, ChevronDown, Star } from 'lucide-react';
+import { Github, Linkedin, Mail, Calendar, ExternalLink, Download, Code, Briefcase, ChevronDown, Star, Twitch, BookOpen, X } from 'lucide-react';
 
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('hero');
@@ -447,14 +447,14 @@ const downloadResume = () => {
           
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <a
-              href="mailto:your.email@example.com" // Update with your actual email
+              href="mailto:kartik.n.jha@gmail.com" // Update with your actual email
               className="flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-lg"
             >
               <Mail className="w-4 h-4" />
               Send Email
             </a>
             <a
-              href="https://calendly.com/your-schedule" // Update with your actual Calendly link
+              href="https://calendly.com/kartik-n-jha/15min" // Update with your actual Calendly link
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors font-medium"
@@ -469,7 +469,8 @@ const downloadResume = () => {
               Or find me on social media
             </p>
             <div className="flex justify-center gap-6 mt-4">
-              <a
+  {/*         
+    <a
                 href="https://github.com/KartikJha"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -477,14 +478,40 @@ const downloadResume = () => {
               >
                 <Github className="w-5 h-5" />
               </a>
+    */}
               <a
-                href="https://linkedin.com/in/your-profile" // Update with your actual LinkedIn
+                href="https://www.linkedin.com/in/kartik-j-31074b170/" // Update with your actual LinkedIn
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-blue-600 transition-colors"
               >
                 <Linkedin className="w-5 h-5" />
               </a>
+              <a
+                href="https://www.twitch.tv/gamedev90_" // Update with your actual LinkedIn
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-blue-600 transition-colors"
+              >
+                <Twitch className="w-5 h-5" />
+              </a>
+              <a
+                href="https://dev.to/gamedev90" // Update with your actual LinkedIn
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-blue-600 transition-colors"
+              >
+                <BookOpen className="w-5 h-5" />
+              </a>
+              <a
+                href="https://x.com/__gamedev90" // Update with your actual LinkedIn
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-blue-600 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </a>
+
             </div>
           </div>
         </div>
