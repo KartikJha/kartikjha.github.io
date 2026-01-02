@@ -1,25 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, Calendar, ExternalLink, Download, Code, Briefcase, ChevronDown, Star, Twitch, BookOpen, X } from 'lucide-react';
+import { Github, Linkedin, Mail, Calendar, ExternalLink, Download, Code, Briefcase, ChevronDown, Star, Twitch, BookOpen, X, Moon, Sun } from 'lucide-react';
 
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('hero');
   const [isScrolled, setIsScrolled] = useState(false);
   const [resumeError, setResumeError] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const storedPrefs = window.localStorage.getItem('color-theme');
+      if (typeof storedPrefs === 'string') {
+        return storedPrefs;
+      }
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+      }
+    }
+    return 'light';
+  });
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      
+
       // Update active section based on scroll position
       const sections = ['hero', 'about', 'projects', 'contact'];
       const scrollPos = window.scrollY + 100;
-      
+
       sections.forEach(section => {
         const element = document.getElementById(section);
         if (element) {
           const offsetTop = element.offsetTop;
           const offsetBottom = offsetTop + element.offsetHeight;
-          
+
           if (scrollPos >= offsetTop && scrollPos < offsetBottom) {
             setActiveSection(section);
           }
@@ -31,6 +43,17 @@ const Portfolio = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const root = window.document.documentElement;
+    root.classList.remove('light', 'dark');
+    root.classList.add(theme);
+    localStorage.setItem('color-theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+  };
+
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -38,51 +61,19 @@ const Portfolio = () => {
     }
   };
 
-/*
-  const downloadResume = async () => {
+  const downloadResume = () => {
     try {
-      // Try to read the uploaded resume file
-      if (window.fs && window.fs.readFile) {
-        // This would work if there's an uploaded file - replace 'resume.pdf' with actual filename
-        const resumeData = await window.fs.readFile('resume.pdf');
-        const blob = new Blob([resumeData], { type: 'application/pdf' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'Kartik_Jha_Resume.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-      } else {
-        // Fallback - you would replace this with your actual resume URL
-        const link = document.createElement('a');
-        link.href = '/Kartik_Jha_Resume.pdf';
-        link.download = 'Kartik_Jha_Resume.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }
+      const link = document.createElement('a');
+      link.href = '/Kartik_Jha_Resume.pdf';  // GitHub Pages will serve this
+      link.download = 'Kartik_Jha_Resume.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     } catch (error) {
       setResumeError(true);
       console.error('Resume download failed:', error);
-      // You could show a message to the user here
     }
   };
-*/
-const downloadResume = () => {
-  try {
-    const link = document.createElement('a');
-    link.href = '/Kartik_Jha_Resume.pdf';  // GitHub Pages will serve this
-    link.download = 'Kartik_Jha_Resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  } catch (error) {
-    setResumeError(true);
-    console.error('Resume download failed:', error);
-  }
-};
 
   // Projects - Update these with your actual projects
   const projects = [
@@ -137,20 +128,21 @@ const downloadResume = () => {
   const otherProjects = projects.filter(p => !p.featured);
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <div className="min-h-screen bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
       {/* Navigation */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-sm' : 'bg-transparent'
-      }`}>
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
+          ? 'bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm shadow-sm dark:shadow-slate-800'
+          : 'bg-transparent'
+        }`}>
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex justify-between items-center py-4">
             <button
               onClick={() => scrollToSection('hero')}
-              className="text-xl font-bold hover:text-blue-600 transition-colors"
+              className="text-xl font-bold hover:text-blue-600 dark:hover:text-blue-400 transition-colors dark:text-white"
             >
               Kartik Jha
             </button>
-            <div className="hidden md:flex space-x-8">
+            <div className="hidden md:flex items-center space-x-8">
               {[
                 { id: 'about', label: 'About' },
                 { id: 'projects', label: 'Projects' },
@@ -159,15 +151,27 @@ const downloadResume = () => {
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
-                  className={`text-sm font-medium transition-colors ${
-                    activeSection === section.id
-                      ? 'text-blue-600'
-                      : 'text-gray-600 hover:text-gray-900'
-                  }`}
+                  className={`text-sm font-medium transition-colors ${activeSection === section.id
+                      ? 'text-blue-600 dark:text-blue-400'
+                      : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+                    }`}
                 >
                   {section.label}
                 </button>
               ))}
+
+              {/* Theme Toggle Button */}
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+                aria-label="Toggle dark mode"
+              >
+                {theme === 'light' ? (
+                  <Moon className="w-5 h-5" />
+                ) : (
+                  <Sun className="w-5 h-5" />
+                )}
+              </button>
             </div>
           </div>
         </div>
@@ -176,31 +180,31 @@ const downloadResume = () => {
       {/* Hero Section */}
       <section id="hero" className="min-h-screen flex items-center justify-center px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-light mb-6 tracking-tight">
+          <h1 className="text-5xl md:text-7xl font-light mb-6 tracking-tight dark:text-white">
             Full-Stack Engineer
-            <span className="block text-blue-600 mt-2">& Problem Solver</span>
+            <span className="block text-blue-600 dark:text-blue-400 mt-2">& Problem Solver</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
-            Passionate about building scalable web applications with modern technologies. 
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
+            Passionate about building scalable web applications with modern technologies.
             I create elegant solutions to complex problems.
           </p>
-          
+
           {/* Developer Info Links */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             <a
-              href="https://www.linkedin.com/in/kartik-j-31074b170/" // Update with your actual LinkedIn
+              href="https://www.linkedin.com/in/kartik-j-31074b170/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-full hover:bg-gray-50 transition-colors text-sm font-medium"
+              className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-slate-700 rounded-full hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors text-sm font-medium dark:text-gray-200"
             >
               <Linkedin className="w-4 h-4" />
               LinkedIn
             </a>
             <a
-              href="https://www.toptal.com/resume/kartik-jha" // Update with your actual Toptal profile
+              href="https://www.toptal.com/resume/kartik-jha"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-full hover:bg-gray-50 transition-colors text-sm font-medium"
+              className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-slate-700 rounded-full hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors text-sm font-medium dark:text-gray-200"
             >
               <Briefcase className="w-4 h-4" />
               Toptal
@@ -209,7 +213,7 @@ const downloadResume = () => {
               href="https://github.com/KartikJha"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-full hover:bg-gray-50 transition-colors text-sm font-medium"
+              className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-slate-700 rounded-full hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors text-sm font-medium dark:text-gray-200"
             >
               <Github className="w-4 h-4" />
               GitHub
@@ -218,7 +222,7 @@ const downloadResume = () => {
 
           <button
             onClick={() => scrollToSection('about')}
-            className="animate-bounce text-gray-400 hover:text-gray-600 transition-colors"
+            className="animate-bounce text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
             aria-label="Scroll to about section"
           >
             <ChevronDown className="w-6 h-6" />
@@ -227,67 +231,67 @@ const downloadResume = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24 px-6 bg-gray-50">
+      <section id="about" className="py-24 px-6 bg-gray-50 dark:bg-slate-800/50">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-light mb-4">About Me</h2>
-            <div className="w-24 h-px bg-blue-600 mx-auto"></div>
+            <h2 className="text-4xl font-light mb-4 dark:text-white">About Me</h2>
+            <div className="w-24 h-px bg-blue-600 dark:bg-blue-500 mx-auto"></div>
           </div>
-          
+
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                I'm a passionate full-stack developer with expertise in modern web technologies. 
-                I love creating scalable applications that solve real-world problems and deliver 
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                I'm a passionate full-stack developer with expertise in modern web technologies.
+                I love creating scalable applications that solve real-world problems and deliver
                 exceptional user experiences.
               </p>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                When I'm not coding, you'll find me exploring new technologies, contributing to 
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+                When I'm not coding, you'll find me exploring new technologies, contributing to
                 open-source projects, or sharing knowledge with the developer community.
               </p>
-              
+
               <a
                 onClick={downloadResume}
-                style={{cursor: "pointer"}}
-                className="inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors font-medium"
+                style={{ cursor: "pointer" }}
+                className="inline-flex items-center gap-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-6 py-3 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors font-medium"
               >
                 <Download className="w-4 h-4" />
                 Download Resume
               </a>
-              
+
               {resumeError && (
-                <p className="text-sm text-red-600 mt-2">
+                <p className="text-sm text-red-600 dark:text-red-400 mt-2">
                   Resume download temporarily unavailable. Please contact me directly.
                 </p>
               )}
             </div>
-            
+
             <div className="space-y-8">
               <div>
-                <h3 className="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wider">
+                <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3 uppercase tracking-wider">
                   Technical Skills
                 </h3>
                 <div className="grid grid-cols-2 gap-3">
                   {[
-                    'JavaScript', 'TypeScript', 'React', 'Node.js', 
+                    'JavaScript', 'TypeScript', 'React', 'Node.js',
                     'Express.js', 'Python', 'FASTApi', 'MongoDB', 'PostgreSQL', 'Linux Administration', 'K8S', 'AWS'
                   ].map((skill, index) => (
-                    <div 
+                    <div
                       key={index}
-                      className="flex items-center gap-2 text-gray-700"
+                      className="flex items-center gap-2 text-gray-700 dark:text-gray-200"
                     >
-                      <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                      <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full"></div>
                       {skill}
                     </div>
                   ))}
                 </div>
               </div>
-              
+
               <div>
-                <h3 className="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wider">
+                <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3 uppercase tracking-wider">
                   Focus Areas
                 </h3>
-                <div className="space-y-2 text-gray-700">
+                <div className="space-y-2 text-gray-700 dark:text-gray-200">
                   <div>• Full-Stack Web Development</div>
                   <div>• System Architecture & Design</div>
                   <div>• API Development & Integration</div>
@@ -303,9 +307,9 @@ const downloadResume = () => {
       <section id="projects" className="py-24 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-light mb-4">Featured Projects</h2>
-            <div className="w-24 h-px bg-blue-600 mx-auto mb-4"></div>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-light mb-4 dark:text-white">Featured Projects</h2>
+            <div className="w-24 h-px bg-blue-600 dark:bg-blue-500 mx-auto mb-4"></div>
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               A selection of projects showcasing my technical skills and problem-solving approach
             </p>
           </div>
@@ -313,65 +317,65 @@ const downloadResume = () => {
           {/* Featured Projects */}
           <div className="grid lg:grid-cols-2 gap-8 mb-16">
             {featuredProjects.map((project, index) => (
-              <div key={index} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+              <div key={index} className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg dark:shadow-slate-900/50 hover:shadow-xl hover:dark:shadow-slate-900 transition-all duration-300 border border-gray-100 dark:border-slate-700">
                 <div className="p-8">
                   <div className="flex items-start justify-between mb-4">
-                    <h3 className="text-xl font-semibold text-gray-900">{project.title}</h3>
-                    <div className="flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{project.title}</h3>
+                    <div className="flex items-center gap-1 px-2 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 text-xs font-medium rounded-full">
                       <Star className="w-3 h-3 fill-current" />
                       Featured
                     </div>
                   </div>
-                  
-                  <p className="text-gray-600 mb-6 leading-relaxed" style={{minHeight: "130px"}}>{project.description}</p>
-                 <div> 
-                  {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tech.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  
-                  {/* Links */}
-                  <div className="flex flex-wrap gap-4">
-                    {project.liveLink && (
+
+                  <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed" style={{ minHeight: "130px" }}>{project.description}</p>
+                  <div>
+                    {/* Tech Stack */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.tech.map((tech, techIndex) => (
+                        <span
+                          key={techIndex}
+                          className="px-3 py-1 bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-200 text-sm rounded-full font-medium"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Links */}
+                    <div className="flex flex-wrap gap-4">
+                      {project.liveLink && (
+                        <a
+                          href={project.liveLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors font-medium"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                          Live Demo
+                        </a>
+                      )}
                       <a
-                        href={project.liveLink}
+                        href={project.codeLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors font-medium"
+                        className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors font-medium"
                       >
-                        <ExternalLink className="w-4 h-4" />
-                        Live Demo
+                        <Code className="w-4 h-4" />
+                        Source Code
                       </a>
-                    )}
-                    <a
-                      href={project.codeLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors font-medium"
-                    >
-                      <Code className="w-4 h-4" />
-                      Source Code
-                    </a>
-                    {project.npmLink && (
-                      <a
-                        href={project.npmLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-red-600 hover:text-red-800 transition-colors font-medium"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        NPM Package
-                      </a>
-                    )}
+                      {project.npmLink && (
+                        <a
+                          href={project.npmLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 transition-colors font-medium"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                          NPM Package
+                        </a>
+                      )}
+                    </div>
                   </div>
-              </div>
                 </div>
               </div>
             ))}
@@ -379,54 +383,54 @@ const downloadResume = () => {
 
           {/* Other Projects */}
           <div>
-            <h3 className="text-2xl font-light mb-8 text-center">Other Projects</h3>
+            <h3 className="text-2xl font-light mb-8 text-center dark:text-white">Other Projects</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {otherProjects.map((project, index) => (
-                <div key={index} className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100">
-                  <h4 className="text-lg font-semibold mb-3 text-gray-900">{project.title}</h4>
-                  <p style={{minHeight: "130px"}}className="text-gray-600 mb-4 text-sm leading-relaxed">{project.description}</p>
-<div>                  
-                  {/* Tech Stack - Show only first 3 */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.slice(0, 3).map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                    {project.tech.length > 3 && (
-                      <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">
-                        +{project.tech.length - 3}
-                      </span>
-                    )}
-                  </div>
-                  
-                  {/* Links */}
-                  <div className="flex gap-4 text-sm">
-                    {project.liveLink && (
+                <div key={index} className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm dark:shadow-slate-900/50 hover:shadow-md hover:dark:shadow-slate-900 transition-all duration-300 border border-gray-100 dark:border-slate-700">
+                  <h4 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">{project.title}</h4>
+                  <p style={{ minHeight: "130px" }} className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">{project.description}</p>
+                  <div>
+                    {/* Tech Stack - Show only first 3 */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tech.slice(0, 3).map((tech, techIndex) => (
+                        <span
+                          key={techIndex}
+                          className="px-2 py-1 bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-200 text-xs rounded-full"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                      {project.tech.length > 3 && (
+                        <span className="px-2 py-1 bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-200 text-xs rounded-full">
+                          +{project.tech.length - 3}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Links */}
+                    <div className="flex gap-4 text-sm">
+                      {project.liveLink && (
+                        <a
+                          href={project.liveLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
+                        >
+                          <ExternalLink className="w-3 h-3" />
+                          Demo
+                        </a>
+                      )}
                       <a
-                        href={project.liveLink}
+                        href={project.codeLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-blue-600 hover:text-blue-800 transition-colors"
+                        className="flex items-center gap-1 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                       >
-                        <ExternalLink className="w-3 h-3" />
-                        Demo
+                        <Code className="w-3 h-3" />
+                        Code
                       </a>
-                    )}
-                    <a
-                      href={project.codeLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-gray-600 hover:text-gray-900 transition-colors"
-                    >
-                      <Code className="w-3 h-3" />
-                      Code
-                    </a>
+                    </div>
                   </div>
-                </div>
                 </div>
               ))}
             </div>
@@ -435,20 +439,20 @@ const downloadResume = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 px-6 bg-gray-50">
+      <section id="contact" className="py-24 px-6 bg-gray-50 dark:bg-slate-800/50">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-light mb-4">Let's Connect</h2>
-          <div className="w-24 h-px bg-blue-600 mx-auto mb-8"></div>
-          
-          <p className="text-lg text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
-            I'm always interested in discussing new opportunities, challenging projects, 
+          <h2 className="text-4xl font-light mb-4 dark:text-white">Let's Connect</h2>
+          <div className="w-24 h-px bg-blue-600 dark:bg-blue-500 mx-auto mb-8"></div>
+
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+            I'm always interested in discussing new opportunities, challenging projects,
             or just having a conversation about technology. Don't hesitate to reach out!
           </p>
-          
+
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <a
               href="mailto:kartik.n.jha@gmail.com" // Update with your actual email
-              className="flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-lg"
+              className="flex items-center gap-2 bg-blue-600 dark:bg-blue-500 text-white px-8 py-4 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors font-medium shadow-lg"
             >
               <Mail className="w-4 h-4" />
               Send Email
@@ -457,19 +461,19 @@ const downloadResume = () => {
               href="https://calendly.com/kartik-n-jha/15min" // Update with your actual Calendly link
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors font-medium"
+              className="flex items-center gap-2 border-2 border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-200 px-8 py-4 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors font-medium"
             >
               <Calendar className="w-4 h-4" />
               Schedule a Call
             </a>
           </div>
-          
-          <div className="mt-12 pt-8 border-t border-gray-200">
-            <p className="text-gray-500 text-sm">
+
+          <div className="mt-12 pt-8 border-t border-gray-200 dark:border-slate-700">
+            <p className="text-gray-500 dark:text-gray-400 text-sm">
               Or find me on social media
             </p>
             <div className="flex justify-center gap-6 mt-4">
-  {/*         
+              {/*         
     <a
                 href="https://github.com/KartikJha"
                 target="_blank"
@@ -483,7 +487,7 @@ const downloadResume = () => {
                 href="https://www.linkedin.com/in/kartik-j-31074b170/" // Update with your actual LinkedIn
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-600 transition-colors"
+                className="text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 <Linkedin className="w-5 h-5" />
               </a>
@@ -491,7 +495,7 @@ const downloadResume = () => {
                 href="https://www.twitch.tv/gamedev90_" // Update with your actual LinkedIn
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-600 transition-colors"
+                className="text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 <Twitch className="w-5 h-5" />
               </a>
@@ -499,7 +503,7 @@ const downloadResume = () => {
                 href="https://dev.to/gamedev90" // Update with your actual LinkedIn
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-600 transition-colors"
+                className="text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 <BookOpen className="w-5 h-5" />
               </a>
@@ -507,7 +511,7 @@ const downloadResume = () => {
                 href="https://x.com/__gamedev90" // Update with your actual LinkedIn
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-600 transition-colors"
+                className="text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 <X className="w-5 h-5" />
               </a>
@@ -518,8 +522,8 @@ const downloadResume = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-6 border-t border-gray-200">
-        <div className="max-w-6xl mx-auto text-center text-gray-500 text-sm">
+      <footer className="py-8 px-6 border-t border-gray-200 dark:border-slate-800">
+        <div className="max-w-6xl mx-auto text-center text-gray-500 dark:text-gray-400 text-sm">
           <p>&copy; {new Date().getFullYear()} Kartik Jha. All rights reserved.</p>
         </div>
       </footer>

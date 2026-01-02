@@ -1,184 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#2563eb" />
-    <meta
-      name="description"
-      content="Kartik Jha - Full Stack Developer specializing in React, Node.js, and modern web technologies. Passionate about building scalable applications and solving complex problems."
-    />
-    <meta name="keywords" content="Kartik Jha, Full Stack Developer, React Developer, Node.js, JavaScript, TypeScript, Web Development, Software Engineer" />
-    <meta name="author" content="Kartik Jha" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://kartikjha.github.io/" />
-    <meta property="og:title" content="Kartik Jha - Full Stack Developer" />
-    <meta property="og:description" content="Full Stack Developer specializing in React, Node.js, and modern web technologies. Passionate about building scalable applications." />
-    <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://kartikjha.github.io/" />
-    <meta property="twitter:title" content="Kartik Jha - Full Stack Developer" />
-    <meta property="twitter:description" content="Full Stack Developer specializing in React, Node.js, and modern web technologies." />
-    <meta property="twitter:image" content="%PUBLIC_URL%/og-image.png" />
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="description"
+    content="Kartik Jha - Full Stack Developer specializing in React, Node.js, and modern web technologies. Passionate about building scalable applications and solving complex problems." />
+  <meta name="keywords"
+    content="Kartik Jha, Full Stack Developer, React Developer, Node.js, JavaScript, TypeScript, Web Development, Software Engineer" />
+  <meta name="author" content="Kartik Jha" />
 
-    <!-- Apple Touch Icon -->
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    
-    <!-- Manifest -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    
-    <!-- Preconnect to external domains for better performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Google Fonts - Inter for clean, modern typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS CDN for styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'system-ui', 'sans-serif'],
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kartikjha.github.io/" />
+  <meta property="og:title" content="Kartik Jha - Full Stack Developer" />
+  <meta property="og:description"
+    content="Full Stack Developer specializing in React, Node.js, and modern web technologies. Passionate about building scalable applications." />
+  <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://kartikjha.github.io/" />
+  <meta property="twitter:title" content="Kartik Jha - Full Stack Developer" />
+  <meta property="twitter:description"
+    content="Full Stack Developer specializing in React, Node.js, and modern web technologies." />
+  <meta property="twitter:image" content="%PUBLIC_URL%/og-image.png" />
+
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+
+  <!-- Manifest -->
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+  <!-- Preconnect to external domains for better performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Google Fonts - Inter for clean, modern typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN for styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            primary: {
+              50: '#eff6ff',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              900: '#1e3a8a',
+            }
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-in-out',
+            'slide-up': 'slideUp 0.6s ease-out',
+            'bounce-slow': 'bounce 3s infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
             },
-            colors: {
-              primary: {
-                50: '#eff6ff',
-                500: '#3b82f6',
-                600: '#2563eb',
-                700: '#1d4ed8',
-                900: '#1e3a8a',
-              }
-            },
-            animation: {
-              'fade-in': 'fadeIn 0.5s ease-in-out',
-              'slide-up': 'slideUp 0.6s ease-out',
-              'bounce-slow': 'bounce 3s infinite',
-            },
-            keyframes: {
-              fadeIn: {
-                '0%': { opacity: '0', transform: 'translateY(10px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' }
-              },
-              slideUp: {
-                '0%': { opacity: '0', transform: 'translateY(30px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' }
-              }
+            slideUp: {
+              '0%': { opacity: '0', transform: 'translateY(30px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
             }
           }
         }
       }
-    </script>
-    
-    <title>Kartik Jha - Full Stack Developer</title>
-    
-    <!-- Additional CSS for custom styling -->
-    <style>
+    }
+  </script>
+
+  <title>Kartik Jha - Full Stack Developer</title>
+
+  <!-- Additional CSS for custom styling -->
+  <style>
+    * {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Custom focus states */
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid #2563eb;
+      outline-offset: 2px;
+    }
+
+    /* Smooth transitions for all interactive elements */
+    a,
+    button {
+      transition: all 0.2s ease-in-out;
+    }
+
+    /* Loading animation */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(37, 99, 235, 0.3);
+      border-radius: 50%;
+      border-top-color: #2563eb;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Print styles */
+    @media print {
+
+      nav,
+      footer {
+        display: none;
+      }
+
+      .no-print {
+        display: none;
+      }
+
       * {
-        scroll-behavior: smooth;
+        color: black !important;
+        background: white !important;
       }
-      
-      body {
-        font-family: 'Inter', system-ui, -apple-system, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Accessibility improvements */
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
       }
-      
-      /* Custom scrollbar */
-      ::-webkit-scrollbar {
-        width: 6px;
+    }
+
+    /* Dark mode support for future enhancement */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-primary: #0f172a;
+        --text-primary: #f8fafc;
       }
-      
-      ::-webkit-scrollbar-track {
-        background: #f1f5f9;
-      }
-      
-      ::-webkit-scrollbar-thumb {
-        background: #cbd5e1;
-        border-radius: 3px;
-      }
-      
-      ::-webkit-scrollbar-thumb:hover {
-        background: #94a3b8;
-      }
-      
-      /* Custom focus states */
-      button:focus-visible,
-      a:focus-visible {
-        outline: 2px solid #2563eb;
-        outline-offset: 2px;
-      }
-      
-      /* Smooth transitions for all interactive elements */
-      a, button {
-        transition: all 0.2s ease-in-out;
-      }
-      
-      /* Loading animation */
-      .loading {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        border: 3px solid rgba(37, 99, 235, 0.3);
-        border-radius: 50%;
-        border-top-color: #2563eb;
-        animation: spin 1s ease-in-out infinite;
-      }
-      
-      @keyframes spin {
-        to { transform: rotate(360deg); }
-      }
-      
-      /* Print styles */
-      @media print {
-        nav, footer {
-          display: none;
-        }
-        
-        .no-print {
-          display: none;
-        }
-        
-        * {
-          color: black !important;
-          background: white !important;
-        }
-      }
-      
-      /* Accessibility improvements */
-      @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-          scroll-behavior: auto !important;
-        }
-      }
-      
-      /* Dark mode support for future enhancement */
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --bg-primary: #0f172a;
-          --text-primary: #f8fafc;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
@@ -200,9 +210,9 @@
       ]
     }
     </script>
-    
-    <!-- Google Analytics - Replace with your tracking ID -->
-    <!-- 
+
+  <!-- Google Analytics - Replace with your tracking ID -->
+  <!-- 
     <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -211,5 +221,6 @@
       gtag('config', 'GA_MEASUREMENT_ID');
     </script>
     -->
-  </body>
+</body>
+
 </html>
