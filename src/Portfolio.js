@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, Calendar, ExternalLink, Download, Code, Briefcase, ChevronDown, Star, Twitch, BookOpen, X, Moon, Sun } from 'lucide-react';
+import { Github, Linkedin, Mail, Calendar, ExternalLink, Download, Code, Briefcase, ChevronDown, Star, Twitch, BookOpen, X, Moon, Sun, Youtube, Instagram, Music } from 'lucide-react';
 
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('hero');
@@ -40,7 +40,23 @@ const Portfolio = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    // Handle initial hash on load
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash && hash.startsWith('#!/')) {
+        const sectionId = hash.replace('#!/', '');
+        scrollToSection(sectionId, false);
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    handleHashChange();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('hashchange', handleHashChange);
+    };
   }, []);
 
   useEffect(() => {
@@ -54,10 +70,13 @@ const Portfolio = () => {
     setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
   };
 
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = (sectionId, updateHash = true) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+      if (updateHash) {
+        window.history.pushState(null, '', `#!/${sectionId}`);
+      }
     }
   };
 
@@ -131,8 +150,8 @@ const Portfolio = () => {
     <div className="min-h-screen bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
       {/* Navigation */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
-          ? 'bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm shadow-sm dark:shadow-slate-800'
-          : 'bg-transparent'
+        ? 'bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm shadow-sm dark:shadow-slate-800'
+        : 'bg-transparent'
         }`}>
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex justify-between items-center py-4">
@@ -152,8 +171,8 @@ const Portfolio = () => {
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
                   className={`text-sm font-medium transition-colors ${activeSection === section.id
-                      ? 'text-blue-600 dark:text-blue-400'
-                      : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+                    ? 'text-blue-600 dark:text-blue-400'
+                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
                     }`}
                 >
                   {section.label}
@@ -483,6 +502,33 @@ const Portfolio = () => {
                 <Github className="w-5 h-5" />
               </a>
     */}
+              <a
+                href="https://www.youtube.com/@gamedev90"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 dark:text-gray-500 hover:text-red-600 transition-colors"
+                title="YouTube"
+              >
+                <Youtube className="w-5 h-5" />
+              </a>
+              <a
+                href="https://soundcloud.com/user-649716873"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 dark:text-gray-500 hover:text-orange-500 transition-colors"
+                title="SoundCloud"
+              >
+                <Music className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.instagram.com/gamedev90/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 dark:text-gray-500 hover:text-pink-600 transition-colors"
+                title="Instagram"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
               <a
                 href="https://www.linkedin.com/in/kartik-j-31074b170/" // Update with your actual LinkedIn
                 target="_blank"
