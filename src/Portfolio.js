@@ -115,7 +115,7 @@ const Portfolio = () => {
       featured: true
     },
     {
-      title: "Colot Sticks",
+      title: "Color Sticks",
       description: "2D game engine focusing on performance optimization and color-based mechanics (Work in Progress)",
       tech: ["Typescript", "Javascript", "HTML", "DOM Canvas API"],
       codeLink: "https://github.com/KartikJha/color-sticks",
